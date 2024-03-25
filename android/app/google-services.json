@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "678325312149",
+    "project_id": "codeblock-team-service",
+    "storage_bucket": "codeblock-team-service.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:678325312149:android:b3f04e06d02ab032ef999c",
+        "android_client_info": {
+          "package_name": "com.example.codeblock"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAF6Oov3LWbINS_vz1vYS6vZCVJazS08z0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
