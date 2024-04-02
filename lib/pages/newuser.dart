@@ -1,8 +1,9 @@
-// ignore_for_file: unused_local_variable, unused_catch_clause, prefer_const_constructors
+// ignore_for_file: unused_local_variable, unused_catch_clause, prefer_const_constructors, avoid_print, deprecated_member_use
 
 import 'package:codeblock/pages/home.dart';
 import 'package:codeblock/pages/loginpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -37,6 +38,8 @@ class _NewuserState extends State<Newuser> {
             .createUserWithEmailAndPassword(email: email, password: password)
             .then((value) => Navigator.pushReplacement(context,
                 MaterialPageRoute(builder: (context) => HomeScreen())));
+
+        await saveUserData('harsh', email, password);
       } on FirebaseAuthException catch (ex) {
         setState(() {
           // Show an error message using SnackBar
@@ -50,6 +53,17 @@ class _NewuserState extends State<Newuser> {
         });
       }
     }
+  }
+
+  Future<void> saveUserData(
+      String userId, String email, String password) async {
+    final DatabaseReference userRef =
+        FirebaseDatabase.instance.reference().child('users').child(userId);
+    // Set user data in database
+    await userRef.set({
+      'email': email,
+      'password': password,
+    });
   }
 
   @override

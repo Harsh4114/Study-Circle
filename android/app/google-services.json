@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "678325312149",
-    "project_id": "codeblock-team-service",
-    "storage_bucket": "codeblock-team-service.appspot.com"
+    "project_number": "748377460548",
+    "project_id": "edu-bot-help",
+    "storage_bucket": "edu-bot-help.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:678325312149:android:b3f04e06d02ab032ef999c",
+        "mobilesdk_app_id": "1:748377460548:android:269083f57fc6c1cea59111",
         "android_client_info": {
           "package_name": "com.example.codeblock"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAF6Oov3LWbINS_vz1vYS6vZCVJazS08z0"
+          "current_key": "AIzaSyB9ivvLndwZDGD0xKIzslFjMm5vlQoHG3A"
         }
       ],
       "services": {
