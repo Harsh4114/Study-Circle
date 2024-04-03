@@ -40,19 +40,40 @@ class _collectingdataState extends State<collectingdata> {
     Map<String, dynamic> userData = {
       'Email': email,
       'Password': password,
+      'Time': DateTime.now(),
     };
 
     try {
       await _firebasestore.collection("user").doc(email).set(userData);
-      print("Data Added");
+
+      setState(() {
+        // Show an error message using SnackBar
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Process Done."),
+            behavior: SnackBarBehavior.floating,
+            backgroundColor: Colors.green[200], // Set the behavior to floating
+          ),
+        );
+      });
       // Navigate to home screen after saving data
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => HomeScreen(),
         ),
       );
-    } catch (e) {
-      print("Error saving data: $e");
+    } on FirebaseFirestore catch (error) {
+      String Error = error.toString();
+      setState(() {
+        // Show an error message using SnackBar
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(Error),
+            behavior: SnackBarBehavior.floating,
+            backgroundColor: Colors.red, // Set the behavior to floating
+          ),
+        );
+      });
     } finally {
       setState(() {
         _isSaving = false;

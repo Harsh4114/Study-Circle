@@ -1,4 +1,4 @@
-// ignore_for_file: unused_local_variable, unused_catch_clause, prefer_const_constructors, avoid_print, deprecated_member_use, non_constant_identifier_names
+// ignore_for_file: unused_local_variable, unused_catch_clause, prefer_const_constructors, avoid_print, deprecated_member_use, non_constant_identifier_names, prefer_interpolation_to_compose_strings
 
 import 'package:codeblock/pages/data.dart';
 import 'package:codeblock/pages/loginpage.dart';
@@ -20,16 +20,42 @@ class _NewuserState extends State<Newuser> {
 
   loginfun(String email, String password) async {
     if (emailcontroller.text.isEmpty || passwordcontroller.text.isEmpty) {
-      setState(() {
-        // Show an error message
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Center(child: Text('Please enter both ')),
-            behavior: SnackBarBehavior.floating,
-            backgroundColor: Colors.red,
-          ),
-        );
-      });
+      if (emailcontroller.text.isEmpty) {
+        setState(() {
+          // Show an error message
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Center(child: Text('Please Enter Email ')),
+              behavior: SnackBarBehavior.floating,
+              backgroundColor: Colors.red,
+            ),
+          );
+        });
+      }
+      if (passwordcontroller.text.isEmpty) {
+        setState(() {
+          // Show an error message
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Center(child: Text('Please Enter Passoword')),
+              behavior: SnackBarBehavior.floating,
+              backgroundColor: Colors.red,
+            ),
+          );
+        });
+      }
+      if (emailcontroller.text.isEmpty && passwordcontroller.text.isEmpty) {
+        setState(() {
+          // Show an error message
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Center(child: Text('Please Enter Both')),
+              behavior: SnackBarBehavior.floating,
+              backgroundColor: Colors.red,
+            ),
+          );
+        });
+      }
     } else {
       UserCredential? userCredential;
       try {
@@ -40,11 +66,12 @@ class _NewuserState extends State<Newuser> {
                 MaterialPageRoute(
                     builder: (context) => collectingdata(email, password))));
       } on FirebaseAuthException catch (ex) {
+        String Error = ex.message.toString();
         setState(() {
           // Show an error message using SnackBar
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text("Sorry , Try Again"),
+              content: Text(Error),
               behavior: SnackBarBehavior.floating,
               backgroundColor: Colors.red, // Set the behavior to floating
             ),
