@@ -14,7 +14,6 @@ class collectingdata extends StatefulWidget {
 }
 
 class _collectingdataState extends State<collectingdata> {
-  bool _obscureText = true;
   bool _isSaving = true; // Initially set to true to automatically save data
   TextEditingController emailcontroller = TextEditingController();
   TextEditingController passwordcontroller = TextEditingController();
@@ -24,11 +23,8 @@ class _collectingdataState extends State<collectingdata> {
   @override
   void initState() {
     super.initState();
-    // Set initial values for controllers
     emailcontroller.text = widget.email;
     passwordcontroller.text = widget.password;
-
-    // Save data automatically when the widget is initialized
     _saveUserData(emailcontroller.text, passwordcontroller.text);
   }
 
@@ -50,18 +46,23 @@ class _collectingdataState extends State<collectingdata> {
         // Show an error message using SnackBar
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text("Process Done."),
+            content: Center(
+              child: Text(
+                "Process Done.",
+                style: TextStyle(color: Colors.black),
+              ),
+            ),
             behavior: SnackBarBehavior.floating,
-            backgroundColor: Colors.green[200], // Set the behavior to floating
+            backgroundColor: Color.fromARGB(
+                255, 38, 248, 182), // Set the behavior to floating
           ),
         );
       });
-      // Navigate to home screen after saving data
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => HomeScreen(),
-        ),
-      );
+      // Navigator.of(context).pushReplacement(
+      //   MaterialPageRoute(
+      //     builder: (context) => HomeScreen(),
+      //   ),
+      // );
     } on FirebaseFirestore catch (error) {
       String Error = error.toString();
       setState(() {
@@ -87,7 +88,7 @@ class _collectingdataState extends State<collectingdata> {
       body: Center(
         child: _isSaving
             ? CircularProgressIndicator() // Show CircularProgressIndicator if saving data
-            : SizedBox(), // No button needed
+            : HomeScreen(), // No button needed
       ),
     );
   }
