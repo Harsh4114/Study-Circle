@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "748377460548",
-    "project_id": "edu-bot-help",
-    "storage_bucket": "edu-bot-help.appspot.com"
+    "project_number": "935022244863",
+    "project_id": "edu-bot-help-service",
+    "storage_bucket": "edu-bot-help-service.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:748377460548:android:269083f57fc6c1cea59111",
+        "mobilesdk_app_id": "1:935022244863:android:b448e1081f83bee5c12dca",
         "android_client_info": {
           "package_name": "com.example.codeblock"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyB9ivvLndwZDGD0xKIzslFjMm5vlQoHG3A"
+          "current_key": "AIzaSyCVeIRoPjXvumqAQfvdz3GT7dPDsYfXF7o"
         }
       ],
       "services": {

@@ -1,6 +1,6 @@
-// ignore_for_file: unused_local_variable, unused_catch_clause, prefer_const_constructors, avoid_print, deprecated_member_use
+// ignore_for_file: unused_local_variable, unused_catch_clause, prefer_const_constructors, avoid_print, deprecated_member_use, non_constant_identifier_names
 
-import 'package:codeblock/pages/home.dart';
+import 'package:codeblock/pages/data.dart';
 import 'package:codeblock/pages/loginpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -35,9 +35,10 @@ class _NewuserState extends State<Newuser> {
       try {
         userCredential = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: email, password: password)
-            .then((value) => Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => HomeScreen())));
-
+            .then((value) => Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => collectingdata(email, password))));
       } on FirebaseAuthException catch (ex) {
         setState(() {
           // Show an error message using SnackBar
@@ -52,7 +53,6 @@ class _NewuserState extends State<Newuser> {
       }
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
