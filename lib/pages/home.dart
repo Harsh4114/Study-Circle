@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_print, use_build_context_synchronously
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_print, use_build_context_synchronously, must_be_immutable
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -17,8 +17,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   static final List<Widget> _widgetOptions = <Widget>[
     Center(child: Text('Home Screen')),
-    Center(child: Text('Profile Screen')),
     Center(child: Text('Search Screen')),
+    Center(child: Text('Profile Screen')),
   ];
 
   void _onItemTapped(int index) {
@@ -68,9 +68,10 @@ class _HomeScreenState extends State<HomeScreen> {
       Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (context) => Loginpage()));
     } catch (error) {
+      String mess = error.toString();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text("Error occurred while logging out"),
+          content: Text("Error occurred while logging out" + mess),
           behavior: SnackBarBehavior.floating,
           backgroundColor: Colors.red,
         ),
