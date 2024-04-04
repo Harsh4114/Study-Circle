@@ -18,6 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   static final List<Widget> _widgetOptions = <Widget>[
     Center(child: Text('Home Screen')),
     Center(child: Text('Profile Screen')),
+    Center(child: Text('Search Screen')),
   ];
 
   void _onItemTapped(int index) {
@@ -48,6 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Icon(Icons.home),
             label: 'Home',
           ),
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Profile',
