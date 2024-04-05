@@ -1,7 +1,8 @@
-// ignore_for_file: unused_local_variable, unused_catch_clause, prefer_const_constructors, avoid_print, deprecated_member_use, non_constant_identifier_names, camel_case_types, prefer_final_fields, unused_field, use_key_in_widget_constructors, use_build_context_synchronously
+// ignore_for_file: unused_local_variable, unused_catch_clause, prefer_const_constructors, avoid_print, deprecated_member_use, non_constant_identifier_names, camel_case_types, prefer_final_fields, unused_field, use_key_in_widget_constructors, use_build_context_synchronously, file_names
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:codeblock/pages/home.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class collectingdata extends StatefulWidget {
   final String email;
@@ -46,23 +47,24 @@ class _collectingdataState extends State<collectingdata> {
         // Show an error message using SnackBar
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Center(
+            content: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
+                color:
+                    Colors.orangeAccent, // Changing the color to orangeAccent
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
               child: Text(
-                "Process Done.",
-                style: TextStyle(color: Colors.black),
+                "Login Successfuly",
+                style: TextStyle(
+                    color: Colors.black), // Changing the text color to black
               ),
             ),
             behavior: SnackBarBehavior.floating,
-            backgroundColor: Color.fromARGB(
-                255, 38, 248, 182), // Set the behavior to floating
+            backgroundColor: Colors.white, // Set the behavior to floating
           ),
         );
       });
-      // Navigator.of(context).pushReplacement(
-      //   MaterialPageRoute(
-      //     builder: (context) => HomeScreen(),
-      //   ),
-      // );
     } on FirebaseFirestore catch (error) {
       String Error = error.toString();
       setState(() {
@@ -87,7 +89,7 @@ class _collectingdataState extends State<collectingdata> {
     return Scaffold(
       body: Center(
         child: _isSaving
-            ? CircularProgressIndicator() // Show CircularProgressIndicator if saving data
+            ? Center(child: Lottie.asset("assets/mp4/loading.json"))
             : HomeScreen(), // No button needed
       ),
     );

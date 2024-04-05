@@ -13,6 +13,7 @@ dependencies:
   flutter:
     sdk: flutter
   lottie: ^3.0.0
+  mongo_dart: ^0.10.1
 
 dev_dependencies:
   flutter_test:
