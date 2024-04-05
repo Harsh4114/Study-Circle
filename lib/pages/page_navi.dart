@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_print, use_build_context_synchronously, must_be_immutable, no_leading_underscores_for_local_identifiers, non_constant_identifier_names, prefer_interpolation_to_compose_strings, unnecessary_brace_in_string_interps
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:codeblock/pages/profile.dart';
+import 'package:codeblock/pages/search.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -18,8 +20,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   static final List<Widget> _widgetOptions = <Widget>[
     Center(child: Text('Home Screen')),
-    Center(child: Text('Search Screen')),
-    Center(child: Text('Profile Screen')),
+    SearchScreen(),
+    ProfileScreen()
   ];
 
   void _onItemTapped(int index) {
@@ -31,19 +33,11 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(
-            onPressed: () {
-              logout(context);
-            },
-            icon: Icon(Icons.logout),
-          ),
-        ],
-        title: Center(child: Text("CodeBlock")),
-        backgroundColor: Colors.blue[100],
-      ),
+      // main screen appears here
       body: _widgetOptions.elementAt(_selectedIndex),
+
+      // bottom navigation bar
+
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -63,6 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+// Log out function start from here
   void logout(BuildContext context) async {
     final FirebaseFirestore _firebasestore = FirebaseFirestore.instance;
     String Currentuser = FirebaseAuth.instance.currentUser!.email.toString();

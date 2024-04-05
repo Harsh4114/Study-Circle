@@ -1,6 +1,6 @@
 // ignore_for_file: unused_local_variable, unused_catch_clause, prefer_const_constructors, avoid_print, deprecated_member_use, non_constant_identifier_names, camel_case_types, prefer_final_fields, unused_field, use_key_in_widget_constructors, use_build_context_synchronously, file_names
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:codeblock/pages/home.dart';
+import 'package:codeblock/pages/page_navi.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 

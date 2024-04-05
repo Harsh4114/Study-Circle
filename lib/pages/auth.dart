@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_print, use_build_context_synchronously, camel_case_types
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'home.dart';
+import 'page_navi.dart';
 import 'loginpage.dart';
 
 class auth_page extends StatefulWidget {
