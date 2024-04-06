@@ -17,8 +17,9 @@ class _NewuserState extends State<Newuser> {
   bool _obscureText = true;
   TextEditingController emailcontroller = TextEditingController();
   TextEditingController passwordcontroller = TextEditingController();
+  TextEditingController Namecontroller = TextEditingController();
 
-  loginfun(String email, String password) async {
+  loginfun(String name, String email, String password) async {
     if (emailcontroller.text.isEmpty || passwordcontroller.text.isEmpty) {
       if (emailcontroller.text.isEmpty) {
         setState(() {
@@ -64,7 +65,8 @@ class _NewuserState extends State<Newuser> {
             .then((value) => Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => collectingdata(email, password))));
+                    builder: (context) =>
+                        collectingdata(name, email, password))));
       } on FirebaseAuthException catch (ex) {
         String Error = ex.message.toString();
         setState(() {
@@ -95,6 +97,42 @@ class _NewuserState extends State<Newuser> {
               height: 40,
             ),
             Lottie.asset("assets/mp4/newuser.json", height: 150),
+            const SizedBox(
+              height: 25,
+            ),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  "Name",
+                  style: TextStyle(fontSize: 15, color: Colors.blue[400]),
+                )
+              ],
+            ),
+            TextField(
+              controller: Namecontroller,
+              decoration: InputDecoration(
+                hintText: " Name ",
+                prefixStyle: const TextStyle(color: Colors.black, fontSize: 15),
+                labelStyle: const TextStyle(color: Colors.black),
+                prefixIcon: const Icon(Icons.person),
+                prefixIconColor: Colors.black,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.blue, width: 2.0),
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                filled: true,
+                fillColor: Colors.blue[200],
+              ),
+            ),
             const SizedBox(
               height: 25,
             ),
@@ -191,8 +229,11 @@ class _NewuserState extends State<Newuser> {
               onPressed: () {
                 String password = passwordcontroller.text.toString();
                 String email = emailcontroller.text.toString();
+                String name = Namecontroller.text.toString();
                 // Save login status to SQLite database
-                loginfun(email, password);
+                // FirebaseAuth.instance.currentUser.displayName == name;
+
+                loginfun(name, email, password);
               },
               style: OutlinedButton.styleFrom(
                 side: const BorderSide(

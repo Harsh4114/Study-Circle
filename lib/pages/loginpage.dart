@@ -41,7 +41,11 @@ class _LoginpageState extends State<Loginpage> {
             .then((value) => Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => collectingdata(email, password))));
+                    builder: (context) => collectingdata(
+                        FirebaseAuth.instance.currentUser!.displayName
+                            .toString(),
+                        email,
+                        password))));
       } on FirebaseAuthException catch (ex) {
         setState(() {
           // Show an error message using SnackBar
