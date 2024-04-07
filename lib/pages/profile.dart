@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, non_constant_identifier_names, no_leading_underscores_for_local_identifiers, unnecessary_brace_in_string_interps, use_build_context_synchronously, prefer_interpolation_to_compose_strings, prefer_const_literals_to_create_immutables, sort_child_properties_last
+// ignore_for_file: prefer_const_constructors, non_constant_identifier_names, no_leading_underscores_for_local_identifiers, unnecessary_brace_in_string_interps, use_build_context_synchronously, prefer_interpolation_to_compose_strings, prefer_const_literals_to_create_immutables, sort_child_properties_last, annotate_overrides
 
 import 'package:codeblock/pages/Edit_Profile.dart';
 import 'package:codeblock/pages/setting.dart';
@@ -15,6 +15,14 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   // Current User
   final User user = FirebaseAuth.instance.currentUser!;
+  String? username;
+
+  void initState() {
+    super.initState();
+    // ignore: unnecessary_statements
+
+    username = FirebaseAuth.instance.currentUser!.displayName;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,9 +77,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 Column(
                   children: [
-                    Text(
-                        FirebaseAuth.instance.currentUser!.displayName
-                            .toString(),
+                    Text(username.toString(),
                         style: TextStyle(
                           fontFamily: 'Profile',
                           fontSize: 20.0,

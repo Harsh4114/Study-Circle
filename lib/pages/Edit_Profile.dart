@@ -340,7 +340,8 @@ class _Edit_ProfileState extends State<Edit_Profile> {
                               if (PhoneNumber != null) {
                                 // Update the phone
                                 FirebaseAuth.instance.currentUser!
-                                    .updatePhoneNumber(PhoneNumber);
+                                    .updatePhoneNumber(
+                                        PhoneNumber as PhoneAuthCredential);
                                 // Update the password in the database
 
                                 FirebaseFirestore.instance
