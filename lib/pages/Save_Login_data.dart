@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:codeblock/pages/page_navi.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 
 class collectingdata extends StatefulWidget {
   final String email;
@@ -18,6 +17,7 @@ class collectingdata extends StatefulWidget {
 
 class _collectingdataState extends State<collectingdata> {
   bool _isSaving = true; // Initially set to true to automatically save data
+  double _progress = 0.0; // Progress percentage
   TextEditingController emailcontroller = TextEditingController();
   TextEditingController passwordcontroller = TextEditingController();
   TextEditingController namecontroller = TextEditingController();
@@ -46,45 +46,20 @@ class _collectingdataState extends State<collectingdata> {
       'Email': email,
       'Password': password,
       'Time': DateTime.now(),
+      "Phone Number": "",
     };
 
     try {
       await _firebasestore.collection("user").doc(email).set(userData);
-
-      setState(() {
-        // Show an error message using SnackBar
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
-                color:
-                    Colors.orangeAccent, // Changing the color to orangeAccent
-              ),
-              padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-              child: Text(
-                "Login Successfuly",
-                style: TextStyle(
-                    color: Colors.black), // Changing the text color to black
-              ),
-            ),
-            behavior: SnackBarBehavior.floating,
-            backgroundColor: Colors.white, // Set the behavior to floating
-          ),
-        );
-      });
     } on FirebaseFirestore catch (error) {
       String Error = error.toString();
-      setState(() {
-        // Show an error message using SnackBar
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(Error),
-            behavior: SnackBarBehavior.floating,
-            backgroundColor: Colors.red, // Set the behavior to floating
-          ),
-        );
-      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(Error),
+          behavior: SnackBarBehavior.floating,
+          backgroundColor: Colors.red,
+        ),
+      );
     } finally {
       setState(() {
         _isSaving = false;
@@ -97,7 +72,17 @@ class _collectingdataState extends State<collectingdata> {
     return Scaffold(
       body: Center(
         child: _isSaving
-            ? Center(child: Lottie.asset("assets/mp4/loading.json"))
+            ? Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(), // Circular progress indicator
+                  SizedBox(height: 20),
+                  Text(
+                    '${(_progress * 100).toStringAsFixed(1)}% Progress', // Progress percentage text
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ],
+              )
             : HomeScreen(), // No button needed
       ),
     );

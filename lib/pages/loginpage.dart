@@ -15,11 +15,12 @@ class Loginpage extends StatefulWidget {
 }
 
 class _LoginpageState extends State<Loginpage> {
+  // All the variables
   bool _obscureText = true;
   bool _isChecked = false;
   TextEditingController emailcontroller = TextEditingController();
   TextEditingController passwordcontroller = TextEditingController();
-
+// Login function
   loginfun(String email, String password) async {
     if (emailcontroller.text.isEmpty && passwordcontroller.text.isEmpty) {
       setState(() {
@@ -61,10 +62,12 @@ class _LoginpageState extends State<Loginpage> {
     }
   }
 
+// Build function
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      // Main body starts here
       body: SafeArea(
         top: true,
         bottom: false,
@@ -88,6 +91,7 @@ class _LoginpageState extends State<Loginpage> {
                 )
               ],
             ),
+            // Email text field
             TextField(
               controller: emailcontroller,
               decoration: InputDecoration(
@@ -124,7 +128,7 @@ class _LoginpageState extends State<Loginpage> {
                 )
               ],
             ),
-            // State variable to toggle password visibility
+            // Password
 
             TextField(
               controller: passwordcontroller,
@@ -165,6 +169,7 @@ class _LoginpageState extends State<Loginpage> {
             const SizedBox(
               height: 5,
             ),
+            // Forgot password
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -182,6 +187,7 @@ class _LoginpageState extends State<Loginpage> {
                 )
               ],
             ),
+            // Remember me
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -207,6 +213,7 @@ class _LoginpageState extends State<Loginpage> {
             const SizedBox(
               height: 20,
             ),
+            // Sign in button
             OutlinedButton(
               onPressed: () async {
                 String password = passwordcontroller.text.toString();
@@ -229,6 +236,7 @@ class _LoginpageState extends State<Loginpage> {
             const SizedBox(
               height: 10,
             ),
+            // Create new account
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -252,6 +260,7 @@ class _LoginpageState extends State<Loginpage> {
           ],
         ),
       ),
+      // Main body ends here
     );
   }
 }

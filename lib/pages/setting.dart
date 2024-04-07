@@ -78,7 +78,9 @@ class _SettingPageState extends State<SettingPage> {
     }
 
     try {
-      await FirebaseAuth.instance.signOut();
+      await FirebaseAuth.instance.signOut().then((value) =>
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => Loginpage())));
       setState(() {
         // Show an error message using SnackBar
         ScaffoldMessenger.of(context).showSnackBar(

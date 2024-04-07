@@ -14,6 +14,7 @@ class Newuser extends StatefulWidget {
 }
 
 class _NewuserState extends State<Newuser> {
+  // All the variables
   bool _obscureText = true;
   TextEditingController emailcontroller = TextEditingController();
   TextEditingController passwordcontroller = TextEditingController();
@@ -83,6 +84,7 @@ class _NewuserState extends State<Newuser> {
     }
   }
 
+// Build function
   @override
   Widget build(BuildContext context) {
     return Scaffold(

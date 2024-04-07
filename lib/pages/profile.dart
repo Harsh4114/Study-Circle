@@ -77,23 +77,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           fontSize: 20.0,
                           fontWeight: FontWeight.bold,
                         )),
-
-                    // Stream builder start from here
-                    // StreamBuilder<QuerySnapshot>(
-                    //   stream: FirebaseFirestore.instance
-                    //       .collection("user")
-                    //       .snapshots(),
-                    //   builder: (BuildContext context,
-                    //       AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
-                    //     return Text(user.toString(),
-                    //         style: TextStyle(
-                    //             fontFamily: 'Profile',
-                    //             fontSize: 10.0,
-                    //             fontWeight: FontWeight.bold));
-                    //   },
-                    // ),
-
-                    // Stream builder end here
                     SizedBox(
                       width: 10.0,
                     ),
@@ -156,22 +139,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      // Text(
-                      //   "Posts",
-                      //   style: TextStyle(
-                      //       fontFamily: 'Profile',
-                      //       fontSize: 25.0,
-                      //       fontWeight: FontWeight.bold),
-                      // ),
-                      // Text(
-                      //   "Posts",
-                      //   style: TextStyle(
-                      //       fontFamily: 'Profile',
-                      //       fontSize: 25.0,
-                      //       fontWeight: FontWeight.bold),
-                      // ),
                       Text(
-                        "Posts",
+                        "Your Contribution",
                         style: TextStyle(
                             fontFamily: 'Profile',
                             fontSize: 25.0,
@@ -201,6 +170,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ],
               ),
             ),
+            // Post Section End here
           ],
         ),
       ),
