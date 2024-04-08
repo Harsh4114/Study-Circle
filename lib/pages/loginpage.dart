@@ -1,5 +1,6 @@
 // ignore_for_file: non_constant_identifier_names, unused_local_variable, prefer_const_constructors, avoid_print, use_build_context_synchronously, unused_catch_clause, prefer_const_literals_to_create_immutables, no_leading_underscores_for_local_identifiers, unnecessary_brace_in_string_interps
 
+import 'package:codeblock/Service/Authentication.dart';
 import 'package:codeblock/pages/Save_Login_data.dart';
 import 'package:codeblock/pages/newuser.dart';
 import 'package:codeblock/pages/password.dart';
@@ -219,7 +220,8 @@ class _LoginpageState extends State<Loginpage> {
                 String password = passwordcontroller.text.toString();
                 String email = emailcontroller.text.toString();
                 // Save login status to SQLite database
-                loginfun(email, password);
+                // loginfun(email, password);
+                EmailVerification().Login(email, password);
               },
               style: OutlinedButton.styleFrom(
                 side: const BorderSide(color: Colors.blue),

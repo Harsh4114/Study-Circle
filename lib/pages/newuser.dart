@@ -1,8 +1,7 @@
 // ignore_for_file: unused_local_variable, unused_catch_clause, prefer_const_constructors, avoid_print, deprecated_member_use, non_constant_identifier_names, prefer_interpolation_to_compose_strings
 
-import 'package:codeblock/pages/Save_Login_data.dart';
+import 'package:codeblock/Service/Authentication.dart';
 import 'package:codeblock/pages/loginpage.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -19,70 +18,6 @@ class _NewuserState extends State<Newuser> {
   TextEditingController emailcontroller = TextEditingController();
   TextEditingController passwordcontroller = TextEditingController();
   TextEditingController Namecontroller = TextEditingController();
-
-  loginfun(String name, String email, String password) async {
-    if (emailcontroller.text.isEmpty || passwordcontroller.text.isEmpty) {
-      if (emailcontroller.text.isEmpty) {
-        setState(() {
-          // Show an error message
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Center(child: Text('Please Enter Email ')),
-              behavior: SnackBarBehavior.floating,
-              backgroundColor: Colors.red,
-            ),
-          );
-        });
-      }
-      if (passwordcontroller.text.isEmpty) {
-        setState(() {
-          // Show an error message
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Center(child: Text('Please Enter Passoword')),
-              behavior: SnackBarBehavior.floating,
-              backgroundColor: Colors.red,
-            ),
-          );
-        });
-      }
-      if (emailcontroller.text.isEmpty && passwordcontroller.text.isEmpty) {
-        setState(() {
-          // Show an error message
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Center(child: Text('Please Enter Both')),
-              behavior: SnackBarBehavior.floating,
-              backgroundColor: Colors.red,
-            ),
-          );
-        });
-      }
-    } else {
-      UserCredential? userCredential;
-      try {
-        userCredential = await FirebaseAuth.instance
-            .createUserWithEmailAndPassword(email: email, password: password)
-            .then((value) => Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        collectingdata(name, email, password))));
-      } on FirebaseAuthException catch (ex) {
-        String Error = ex.message.toString();
-        setState(() {
-          // Show an error message using SnackBar
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(Error),
-              behavior: SnackBarBehavior.floating,
-              backgroundColor: Colors.red, // Set the behavior to floating
-            ),
-          );
-        });
-      }
-    }
-  }
 
 // Build function
   @override
@@ -232,10 +167,8 @@ class _NewuserState extends State<Newuser> {
                 String password = passwordcontroller.text.toString();
                 String email = emailcontroller.text.toString();
                 String name = Namecontroller.text.toString();
-                // Save login status to SQLite database
-                // FirebaseAuth.instance.currentUser.displayName == name;
 
-                loginfun(name, email, password);
+                EmailVerification().Sign_Up(email, password, name, 0);
               },
               style: OutlinedButton.styleFrom(
                 side: const BorderSide(
