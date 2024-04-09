@@ -1,8 +1,8 @@
 // ignore_for_file: non_constant_identifier_names, unused_local_variable, prefer_const_constructors, avoid_print, use_build_context_synchronously, unused_catch_clause, prefer_const_literals_to_create_immutables, no_leading_underscores_for_local_identifiers, unnecessary_brace_in_string_interps
 
 import 'package:codeblock/Service/Authentication.dart';
-import 'package:codeblock/pages/Save_Login_data.dart';
 import 'package:codeblock/pages/newuser.dart';
+import 'package:codeblock/pages/page_navi.dart';
 import 'package:codeblock/pages/password.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -40,14 +40,8 @@ class _LoginpageState extends State<Loginpage> {
       try {
         userCredential = await FirebaseAuth.instance
             .signInWithEmailAndPassword(email: email, password: password)
-            .then((value) => Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => collectingdata(
-                        FirebaseAuth.instance.currentUser!.displayName
-                            .toString(),
-                        email,
-                        password))));
+            .then((value) => Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => HomeScreen())));
       } on FirebaseAuthException catch (ex) {
         setState(() {
           // Show an error message using SnackBar
