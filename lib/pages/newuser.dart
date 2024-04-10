@@ -1,8 +1,10 @@
 // ignore_for_file: non_constant_identifier_names, unused_local_variable, prefer_const_constructors, avoid_print, use_build_context_synchronously, unused_catch_clause, prefer_const_literals_to_create_immutables, no_leading_underscores_for_local_identifiers, unnecessary_brace_in_string_interps
 
-import 'package:codeblock/Service/Authentication.dart';
-import 'package:codeblock/pages/Save_Login_data.dart';
+import 'package:codeblock/Service/AUTHENTICATION/Authentication.dart';
+import 'package:codeblock/pages/loading.dart';
 import 'package:codeblock/pages/loginpage.dart';
+import 'package:codeblock/pages/page_navi.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -20,9 +22,34 @@ class _NewuserState extends State<Newuser> {
   TextEditingController passwordcontroller = TextEditingController();
   TextEditingController Namecontroller = TextEditingController();
 
-  void emailverification(
-      String email, String password, String name, int phone) async {
-    EmailVerification().Sign_Up(email, password, name, phone);
+  void Auth(String email, String password, String name) async {
+    try {
+      Authentication()
+          .SignUp(email, password, name)
+          .then((value) => setState(() {
+                // Show an error message using SnackBar
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text("User Created Successfully"),
+                    behavior: SnackBarBehavior.floating,
+                    backgroundColor: Colors.red, // Set the behavior to floating
+                  ),
+                );
+              }))
+          .then((value) => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const HomeScreen())));
+    } on FirebaseAuthException catch (ex) {
+      setState(() {
+        // Show an error message using SnackBar
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Error: ${ex.message}"),
+            behavior: SnackBarBehavior.floating,
+            backgroundColor: Colors.red, // Set the behavior to floating
+          ),
+        );
+      });
+    }
   }
 
 // Build function
@@ -34,11 +61,8 @@ class _NewuserState extends State<Newuser> {
         top: true,
         bottom: false,
         child: ListView(
-          padding: EdgeInsets.all(40),
+          padding: EdgeInsets.only(left: 40, right: 40, top: 2),
           children: [
-            const SizedBox(
-              height: 40,
-            ),
             Lottie.asset("assets/mp4/newuser.json", height: 150),
             const SizedBox(
               height: 25,
@@ -170,23 +194,27 @@ class _NewuserState extends State<Newuser> {
             ),
             OutlinedButton(
               onPressed: () {
-                String password = passwordcontroller.text.toString();
-                String email = emailcontroller.text.toString();
-                String name = Namecontroller.text.toString();
-                int phoneNumber = 0;
-                print("variables done");
-                if (email == "" || password == "" || name == "") {
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      content: Text("Please fill all the fields")));
-                } else {
+                String email = emailcontroller.text;
+                String password = passwordcontroller.text;
+                String name = Namecontroller.text;
+
+                if (email.isNotEmpty &&
+                    password.isNotEmpty &&
+                    name.isNotEmpty) {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => SignUpScreen(
-                              email: email,
-                              password: password,
-                              name: name,
-                              phoneNumber: phoneNumber)));
+                          builder: (context) => Waiting(
+                              email: email, password: password, name: name)));
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: const Text("Please fill all the fields"),
+                      behavior: SnackBarBehavior.floating,
+                      backgroundColor: Colors.red,
+                      // Set the behavior to floating
+                    ),
+                  );
                 }
               },
               style: OutlinedButton.styleFrom(
