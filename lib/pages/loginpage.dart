@@ -68,7 +68,7 @@ class _LoginpageState extends State<Loginpage> {
         child: ListView(
           padding: const EdgeInsets.all(40),
           children: [
-            Lottie.asset("assets/mp4/sim.json", height: 150), // animation
+            Lottie.asset("assets/mp4/verified.json", height: 150), // animation
             const SizedBox(
               height: 25,
             ),
