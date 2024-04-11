@@ -68,10 +68,7 @@ class _LoginpageState extends State<Loginpage> {
         child: ListView(
           padding: const EdgeInsets.all(40),
           children: [
-            const SizedBox(
-              height: 40,
-            ),
-            Lottie.asset("assets/mp4/sigin.json", height: 150), // animation
+            Lottie.asset("assets/mp4/sim.json", height: 150), // animation
             const SizedBox(
               height: 25,
             ),
@@ -209,8 +206,7 @@ class _LoginpageState extends State<Loginpage> {
             ),
             // Sign in button
             OutlinedButton(
-              onPressed: () async {
-              },
+              onPressed: () async {},
               style: OutlinedButton.styleFrom(
                 side: const BorderSide(color: Colors.blue),
                 shape: RoundedRectangleBorder(
