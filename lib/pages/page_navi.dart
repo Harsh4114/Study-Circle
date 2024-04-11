@@ -13,8 +13,16 @@ class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
   static final List<Widget> _widgetOptions = <Widget>[
-    Center(child: Text('Home Screen')),
-    Center(child: Text('Search Screen')),
+    Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Center(child: Text('Home Screen')),
+      ],
+    ),
+    Container(
+      child: Center(child: Text('Add Post Screen')),
+    ),
     Center(child: Text('Profile Screen')),
   ];
 
@@ -33,19 +41,23 @@ class _HomeScreenState extends State<HomeScreen> {
       // bottom navigation bar
 
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.white, // Set background color
+        elevation: 10, // Set elevation
+        type: BottomNavigationBarType
+            .fixed, // Set type to fixed to avoid shifting behavior
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
           ),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
+          BottomNavigationBarItem(icon: Icon(Icons.add), label: 'Add Post'),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Profile',
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.blue[300],
+        selectedItemColor: const Color.fromARGB(255, 124, 183, 232),
         onTap: _onItemTapped,
       ),
     );
