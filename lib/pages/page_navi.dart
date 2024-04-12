@@ -1,5 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_print, use_build_context_synchronously, must_be_immutable, no_leading_underscores_for_local_identifiers, non_constant_identifier_names, prefer_interpolation_to_compose_strings, unnecessary_brace_in_string_interps
 
+import 'package:codeblock/pages/HomeUi.dart';
+// import 'package:codeblock/pages/loginpage.dart';
+// // import 'package:codeblock/pages/loginpage.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -13,16 +16,8 @@ class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
   static final List<Widget> _widgetOptions = <Widget>[
-    Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Center(child: Text('Home Screen')),
-      ],
-    ),
-    Container(
-      child: Center(child: Text('Add Post Screen')),
-    ),
+    HomePage(),
+    Center(child: Text('Search Screen')),
     Center(child: Text('Profile Screen')),
   ];
 
@@ -50,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Icon(Icons.home),
             label: 'Home',
           ),
-          BottomNavigationBarItem(icon: Icon(Icons.add), label: 'Add Post'),
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search '),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Profile',

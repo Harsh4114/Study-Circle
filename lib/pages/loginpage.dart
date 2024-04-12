@@ -1,10 +1,10 @@
 // ignore_for_file: non_constant_identifier_names, unused_local_variable, prefer_const_constructors, avoid_print, use_build_context_synchronously, unused_catch_clause, prefer_const_literals_to_create_immutables, no_leading_underscores_for_local_identifiers, unnecessary_brace_in_string_interps
 
+import 'package:codeblock/Service/AUTHENTICATION/Authentication.dart';
 import 'package:codeblock/pages/newuser.dart';
 import 'package:codeblock/pages/page_navi.dart';
 import 'package:codeblock/pages/password.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class Loginpage extends StatefulWidget {
@@ -16,12 +16,16 @@ class Loginpage extends StatefulWidget {
 
 class _LoginpageState extends State<Loginpage> {
   // All the variables
+  bool _isLoading = false;
   bool _obscureText = true;
   bool _isChecked = false;
   TextEditingController emailcontroller = TextEditingController();
   TextEditingController passwordcontroller = TextEditingController();
 // Login function
   loginfun(String email, String password) async {
+    setState(() {
+      _isLoading = true;
+    });
     if (emailcontroller.text.isEmpty && passwordcontroller.text.isEmpty) {
       setState(() {
         // Show an error message
@@ -39,7 +43,9 @@ class _LoginpageState extends State<Loginpage> {
       try {
         userCredential = await FirebaseAuth.instance
             .signInWithEmailAndPassword(email: email, password: password)
-            .then((value) => Navigator.pushReplacement(context,
+            .then((value) {
+          Authentication().SignIn(email, password);
+        }).then((value) => Navigator.pushReplacement(context,
                 MaterialPageRoute(builder: (context) => HomeScreen())));
       } on FirebaseAuthException catch (ex) {
         setState(() {
@@ -54,6 +60,10 @@ class _LoginpageState extends State<Loginpage> {
         });
       }
     }
+
+    setState(() {
+      _isLoading = false;
+    });
   }
 
 // Build function
@@ -66,9 +76,29 @@ class _LoginpageState extends State<Loginpage> {
         top: true,
         bottom: false,
         child: ListView(
-          padding: const EdgeInsets.all(40),
+          padding: const EdgeInsets.only(right: 40, left: 40, top: 10),
           children: [
-            Lottie.asset("assets/mp4/verified.json", height: 150), // animation
+            Row(
+              children: [
+                Column(
+                  children: [
+                    Text("Welcome\tBack,",
+                        style: TextStyle(
+                            fontFamily: 'Profile',
+                            fontSize: 26,
+                            color: Colors.blue[400],
+                            fontWeight: FontWeight.bold)),
+                    Text("To Study-Circle",
+                        style: TextStyle(
+                            fontFamily: 'Profile',
+                            fontSize: 26,
+                            color: Colors.blue[400],
+                            fontWeight: FontWeight.bold)),
+                  ],
+                ),
+              ],
+            ),
+
             const SizedBox(
               height: 25,
             ),
@@ -87,10 +117,10 @@ class _LoginpageState extends State<Loginpage> {
               controller: emailcontroller,
               decoration: InputDecoration(
                 hintText: " Email ",
-                prefixStyle: const TextStyle(color: Colors.black, fontSize: 15),
+                prefixStyle: const TextStyle(color: Colors.black, fontSize: 55),
                 labelStyle: const TextStyle(color: Colors.black),
                 prefixIcon: const Icon(Icons.mail),
-                prefixIconColor: Colors.black,
+                prefixIconColor: Colors.black45,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
                 ),
@@ -206,19 +236,31 @@ class _LoginpageState extends State<Loginpage> {
             ),
             // Sign in button
             OutlinedButton(
-              onPressed: () async {},
-              style: OutlinedButton.styleFrom(
-                side: const BorderSide(color: Colors.blue),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
+                onPressed: () async {
+                  loginfun(emailcontroller.text, passwordcontroller.text);
+                },
+                style: OutlinedButton.styleFrom(
+                  side: const BorderSide(color: Colors.blue),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 100),
                 ),
-                padding: const EdgeInsets.symmetric(horizontal: 100),
-              ),
-              child: const Text(
-                'Sign In',
-                style: TextStyle(fontSize: 16, color: Colors.blue),
-              ),
-            ),
+                child: _isLoading
+                    ? SizedBox(
+                        height: 20,
+                        width: 20,
+                        child: const CircularProgressIndicator(
+                          color: Colors.blue,
+                          strokeCap: StrokeCap.round,
+                          strokeWidth: 2.5,
+                          backgroundColor: Colors.white,
+                        ),
+                      )
+                    : const Text(
+                        "Sign In",
+                        style: TextStyle(fontSize: 15, color: Colors.blue),
+                      )),
             const SizedBox(
               height: 10,
             ),

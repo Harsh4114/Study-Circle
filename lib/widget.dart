@@ -34,24 +34,3 @@ Widget Loading() {
     ),
   );
 }
-
-Widget Alert(String message) {
-  return Center(
-    child: Container(
-        height: 120,
-        width: double.maxFinite,
-        decoration: BoxDecoration(
-            color: Colors.red[100], borderRadius: BorderRadius.circular(20)),
-        child: ListView(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(message,
-                    style: const TextStyle(fontSize: 20, fontFamily: 'Profile'))
-              ],
-            ),
-          ],
-        )),
-  );
-}
