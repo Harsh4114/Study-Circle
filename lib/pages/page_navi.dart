@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_print, use_build_context_synchronously, must_be_immutable, no_leading_underscores_for_local_identifiers, non_constant_identifier_names, prefer_interpolation_to_compose_strings, unnecessary_brace_in_string_interps
 
 import 'package:codeblock/pages/HomeUi.dart';
+import 'package:codeblock/pages/ProfileUi.dart';
 // import 'package:codeblock/pages/loginpage.dart';
 // // import 'package:codeblock/pages/loginpage.dart';
 import 'package:flutter/material.dart';
@@ -17,8 +18,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   static final List<Widget> _widgetOptions = <Widget>[
     HomePage(),
-    Center(child: Text('Search Screen')),
-    Center(child: Text('Profile Screen')),
+    Center(child: Text('Under Construction')),
+    ProfilePage(),
   ];
 
   void _onItemTapped(int index) {
