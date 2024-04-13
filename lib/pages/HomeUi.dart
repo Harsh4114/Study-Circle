@@ -1,8 +1,12 @@
 // ignore_for_file: prefer_const_constructors, file_names, non_constant_identifier_names, unused_local_variable, body_might_complete_normally_nullable, use_build_context_synchronously
 
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -36,6 +40,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                     IconButton(
                         onPressed: () {
+                          topicController.clear();
+                          descriptionController.clear();
                           Navigator.pop(context);
                         },
                         icon: Icon(Icons.close))
@@ -60,6 +66,8 @@ class _HomePageState extends State<HomePage> {
                 ),
                 SizedBox(height: 15),
                 TextField(
+                  maxLines: 5,
+                  maxLength: 1000,
                   controller: descriptionController,
                   decoration: InputDecoration(
                       hintText: "Description",
@@ -89,6 +97,7 @@ class _HomePageState extends State<HomePage> {
                               : description,
                           "Time": time,
                           "Post": user,
+                          "Email": FirebaseAuth.instance.currentUser!.email,
                         });
                         Future.delayed(Duration(seconds: 2));
 
@@ -147,17 +156,102 @@ class _HomePageState extends State<HomePage> {
                               return Card(
                                 color: Colors.lightBlue[100],
                                 child: ListTile(
-                                  leading: CircleAvatar(
-                                    radius: 30,
-                                    child: Text(
-                                      data["Post"],
-                                      style: TextStyle(fontSize: 10),
-                                    ),
+                                  title: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Topic : ${data["Topic"]}",
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      SizedBox(height: 5),
+                                      Container(
+                                        width: double.maxFinite,
+                                        height: 1,
+                                        decoration: BoxDecoration(
+                                          color: Colors.blue[50],
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                      ),
+                                      SizedBox(height: 5),
+                                      Text(
+                                        "From : ${data["Post"]}",
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      SizedBox(height: 5),
+                                      Container(
+                                        width: double.maxFinite,
+                                        height: 1,
+                                        decoration: BoxDecoration(
+                                          color: Colors.blue[50],
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                      ),
+                                      SizedBox(height: 5),
+                                    ],
                                   ),
-                                  title: Text(data["Topic"]),
-                                  subtitle: Text(data["Description"]),
-
-                                  // trailing: Text(data["Post By"]),
+                                  subtitle: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(data["Description"]),
+                                      SizedBox(height: 5),
+                                      Container(
+                                        width: double.maxFinite,
+                                        height: 1,
+                                        decoration: BoxDecoration(
+                                          color: Colors.blue[50],
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                      ),
+                                      SizedBox(height: 5),
+                                      Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            GestureDetector(
+                                              onTap: () {
+                                                log("Like Tapped");
+                                              },
+                                              child: Icon(Icons.favorite_border,
+                                                  size: 20),
+                                            ),
+                                            GestureDetector(
+                                                onTap: () {
+                                                  log("Comment Tapped");
+                                                },
+                                                child: Icon(Icons.comment,
+                                                    size: 20)),
+                                            GestureDetector(
+                                                onTap: () {
+                                                  log("Share Tapped");
+                                                },
+                                                child: Icon(Icons.share,
+                                                    size: 20)),
+                                            GestureDetector(
+                                                onTap: () {
+                                                  log("Download Tapped");
+                                                },
+                                                child: Icon(Icons.download,
+                                                    size: 20)),
+                                            GestureDetector(
+                                              onTap: () {
+                                                log("Open  Tapped");
+                                              },
+                                              child: Icon(
+                                                  Icons.open_in_full_rounded,
+                                                  size: 20),
+                                            ),
+                                          ])
+                                    ],
+                                  ),
                                 ),
                               );
                             },

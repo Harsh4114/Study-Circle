@@ -44,12 +44,23 @@ class _ChangePasswordState extends State<ChangePassword> {
         padding: const EdgeInsets.all(20.0),
         child: ListView(
           children: [
-            Lottie.asset('assets/mp4/email.json', height: 200),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Lottie.asset('assets/mp4/profile.json',
+                    height: 160, width: 150),
+                Image.asset(
+                  "assets/photo/lock.png",
+                  height: 150,
+                  width: 150,
+                )
+              ],
+            ),
             SizedBox(
               height: 25,
             ),
             Text(
-              "Please enter your email to reset your password.",
+              "\tPlease enter your email to reset \n\tyour password.",
               style: TextStyle(
                   fontSize: 20,
                   fontFamily: 'Profile',

@@ -62,6 +62,28 @@ class _NewuserState extends State<Newuser> {
         child: ListView(
           padding: EdgeInsets.only(left: 40, right: 40, top: 2),
           children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Welcome\t,",
+                        style: TextStyle(
+                            fontFamily: 'Profile',
+                            fontSize: 26,
+                            color: Colors.blue[400],
+                            fontWeight: FontWeight.bold)),
+                    Text("To Study-Circle",
+                        style: TextStyle(
+                            fontFamily: 'Profile',
+                            fontSize: 26,
+                            color: Colors.blue[400],
+                            fontWeight: FontWeight.bold)),
+                  ],
+                ),
+              ],
+            ),
             // Lottie.asset("assets/mp4/newuser.json", height: 150),
             const SizedBox(
               height: 25,

@@ -79,8 +79,10 @@ class _LoginpageState extends State<Loginpage> {
           padding: const EdgeInsets.only(right: 40, left: 40, top: 10),
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text("Welcome\tBack,",
                         style: TextStyle(
