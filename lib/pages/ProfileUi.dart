@@ -155,6 +155,9 @@ class _ProfilePageState extends State<ProfilePage> {
             StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
                     .collection("Posts")
+                    .where("Post",
+                        isEqualTo:
+                            FirebaseAuth.instance.currentUser!.displayName)
                     .orderBy("Time", descending: true)
                     .snapshots(),
                 builder: (context, snapshot) {
